@@ -1,0 +1,43 @@
+import json
+
+from flask import Flask, request, jsonify
+from flask_mysqldb import MySQL
+
+app = Flask(__name__)
+app.config["MySQL_HOST"] = 'localhost'
+app.config["MySQL_USER"] = 'root'
+app.config["MySQL_PASSWORD"] = 'vickyvijay'
+app.config["MySQL_DATABASE"] = 'customers'
+
+mysql = MySQL(app)
+
+
+@app.route('/login', methods=['POST', 'GET'])
+def get_user():
+
+    if request.method == 'GET':
+        cus = mysql.connection.cursor()
+        cus.execute("select * from cus_table")
+        result = cus.fetchall()
+        print(json.dumps(result))
+        # for i in result:
+        #     print(i)
+        # print(json.dumps(i))
+        # print(json.dumps(result))
+        return json.dumps(result)
+
+    elif request.method == "POST":
+        req_Json = request.json
+        #cus_id, cus_name, pur_product, pro_rate
+        cus_id=req_Json["cus_id"]
+        cus_name=req_Json["cus_name"]
+        pur_product=req_Json["pur_product"]
+        pro_rate=req_Json["pro_rate"]
+        cursor=mysql.connection.cursor()
+        cursor.execute("INSERT INTO cus_table(cus_id, cus_name, pur_product, pro_rate)values(%s,%s,%s,%s)",cus_id, cus_name, pur_product, pro_rate)
+        mysql.connection.commit()
+        cursor.close()
+        return jsonify("PosT method Successed",cus_id, cus_name, pur_product, pro_rate)
+
+if __name__ == '__main__':
+    app.run(debug="True")

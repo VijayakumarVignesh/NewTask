@@ -1,0 +1,87 @@
+import json
+from flask import Flask,request
+from flask_mysqldb import MySQL
+import mysql.connector
+import flask_mysql_connector
+import flask_mysql_connector
+import mysql
+
+app=Flask(__name__)
+
+app.config['MYSQL_HOST'] = "localhost"
+app.config['MYSQL_USER'] = "root"
+app.config['MYSQL_PASSWORD'] = "DR29dj921v1#"
+app.config['MYSQL_DATABASE'] = "student"
+mysql = MySQL(app)
+
+@app.route('/getdata',methods=['GET','POST'])
+def getdata ():
+    if request.method=='GET':
+        cur = mysql.connection.cursor()
+        cur.execute("select *from emp_data")
+        result=cur.fetchall()
+        print(result)
+        for i in result:
+            print(i)
+
+if __name__=='__main__':
+    app.run(debug="True")
+
+3333333333333333333333333333333333333333333333333333
+import json
+from flask import Flask,request
+from flask_mysqldb import MySQL
+import mysql.connector
+import flask_mysql_connector
+import flask_mysql_connector
+import mysql
+
+app=Flask(__name__)
+
+app.config['MYSQL_HOST'] 
+From Athiva Technolgy to Everyone 11:09 AM
+import json
+
+from flask import Flask,render_template,request
+from flask_mysqldb import MySQL
+app=Flask(__name__)
+app.config['MYSQL_HOST'] = ''
+app.config['MYSQL_USER'] = ''
+app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_DB'] = ''
+
+mysql = MySQL(app)
+
+@app.route('/login', methods=['GET', 'POST'])
+def get_method():
+    if request.method == 'GET':
+        cur = mysql.connection.cursor()
+        cur.execute("select * from person")
+        myresult = cur.fetchall()
+        print(myresult)
+        print(type(myresult))
+        print(myresult[1])
+        return json.dumps(myresult)
+    # return render_template('index.html')
+
+if __name__=='__main__':
+    app.run(debug="True")
+
+a={}
+    
+    print(json.dumps(a))
+    print(type(json.dumps(a))
+From Athiva Technolgy to Everyone 11:28 AM
+json.loads() takes in a string and returns a json object.
+
+json.dumps() takes in a json object and returns a string.
+
+
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
+list,tuple,fetchall(),http response satatus code,json.loads(),json.dumps()
+http methods
+api
+api/url/endpoint
+
+
+
